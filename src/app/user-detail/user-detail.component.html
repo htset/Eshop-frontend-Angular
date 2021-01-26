@@ -1,0 +1,41 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <label>
+        First Name:    
+        <input id="name" class="form-control"
+        formControlName="firstName" required >
+
+        <div *ngIf="firstName!.invalid && (firstName!.dirty || firstName!.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="firstName!.errors!.required">
+                Name is required.
+            </div>
+            <div *ngIf="firstName!.errors!.minlength">
+                Name must be at least 2 characters long.
+            </div>
+        </div>
+    </label>  
+
+    <label>
+      Last Name:
+        <input id="name" class="form-control"
+        formControlName="lastName" required >
+
+        <div *ngIf="lastName!.invalid && (lastName!.dirty || lastName!.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="lastName!.errors!.required">
+                Name is required.
+            </div>
+            <div *ngIf="lastName!.errors!.minlength">
+                Name must be at least 2 characters long.
+            </div>
+        </div>
+    </label>
+
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+    <br/><br/>
+    Status: {{profileForm.status}}
+  </form>

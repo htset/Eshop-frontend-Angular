@@ -1,0 +1,33 @@
+<app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="filterDisplay"></app-filter>
+<button (click)=toggleFilter()>Show Filter</button>
+<br/>
+<span>Total items: {{count}}, Page: {{page}}, page size: {{pageSize}}</span>
+<div class="container">
+  <div class="row" *ngFor="let item of items">
+    <div class="col-md-1 border">
+      <a routerLink="/item/{{item.id}}">{{item.id}}</a>
+    </div>
+    <div class="col-md-2">
+      <a routerLink="/item/{{item.id}}">{{item.name}}</a>
+    </div>
+    <div class="col-md-1">
+      <a routerLink="/item/{{item.id}}">{{item.category}}</a>
+    </div>
+    <div class="col-md-1">
+      <a routerLink="/item/{{item.id}}">{{item.price}}</a>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-default" title="delete item" (click)="delete(item)">Delete</button>
+    </div>
+  </div>
+</div>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="count"
+  (pageChange)="onPageChange($event)"></ngb-pagination>
+
+<br/>
+<a routerLink="/new_item" class="btn btn-default">Add new Item</a>
+
