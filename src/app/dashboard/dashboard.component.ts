@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Item } from '../item';
-import { ItemService } from '../item.service';
+import { Component } from '@angular/core';
+import { first } from 'rxjs/operators';
+
+import { User } from '@app/_models/User';
+import { UserService } from '@app/_services/user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  itemService: ItemService;
-  items: Item[] = []; 
+  loading = false;
+  users!: User[];
 
-  constructor(private itServ: ItemService) { 
-    this.itemService = itServ;
-  }
+  constructor(private userService: UserService) { }
 
-  getItems(): void {
-//    this.itemService.getItems("", 1, 3).subscribe(items => this.items = items.sort((a,b)=>(a.price<b.price)?1:0).slice(1,5));
-  }
-
-  ngOnInit(): void {
-    this.getItems();
+  ngOnInit() {
+      this.loading = true;
+      this.userService.getAll().pipe(first()).subscribe(users => {
+          this.loading = false;
+          this.users = users;
+      });
   }
 
 }

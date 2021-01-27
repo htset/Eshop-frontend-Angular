@@ -1,8 +1,10 @@
-<h3>Top Items</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let i of items" class="col-1-4" routerLink="/item/{{i.id}}">
-    <div class="module item">
-      <h4>{{i.name}} - {{i.price}}</h4>
-    </div>
-  </a>
+<div class="card mt-4">
+  <h4 class="card-header">You're logged in with Angular 10 & JWT!!</h4>
+  <div class="card-body">
+      <h6>Users from secure api end point</h6>
+      <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+      <ul *ngIf="users">
+          <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+      </ul>
+  </div>
 </div>

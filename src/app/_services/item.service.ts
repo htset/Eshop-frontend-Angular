@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Item } from './item';
+import { Item } from '../_models/item';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import {Filter} from './filter';
-import { ItemPayload } from './ItemPayload';
+import {Filter} from '../_models/filter';
+import { ItemPayload } from '../_models/ItemPayload';
+import { environment } from '@environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
 
 //  private itemsUrl = 'https://localhost:44326/api/items/';  // URL to web api
-  private itemsUrl = 'api/items';  // URL to web api
+  private itemsUrl = `${environment.apiUrl}/items`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

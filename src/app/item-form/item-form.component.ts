@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Item } from '../item';
-import { ItemService } from '../item.service';
+import { Item } from '../_models/item';
+import { ItemService } from '../_services/item.service';
 
 @Component({
   selector: 'app-item-form',

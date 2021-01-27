@@ -1,9 +1,9 @@
 import { Component,OnInit } from '@angular/core';
-import { Item } from '../item';
-import { ItemService } from '../item.service';
-import { StoreService } from '../store.service'
-import { Filter } from '../filter';
-import { EventEmitter } from 'events';
+import { Item } from '../_models/item';
+import { ItemService } from '../_services/item.service';
+import { StoreService } from '../_services/store.service'
+import { Filter } from '../_models/filter';
+//import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-items',

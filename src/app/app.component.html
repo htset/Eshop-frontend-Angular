@@ -1,6 +1,7 @@
 <h1>{{title}}</h1>
 <nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/items">Items</a>
+    <a class="nav-item nav-link" routerLink="/dashboard">Dashboard</a>
+    <a class="nav-item nav-link" routerLink="/items">Items</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
 </nav>
 <router-outlet></router-outlet>
