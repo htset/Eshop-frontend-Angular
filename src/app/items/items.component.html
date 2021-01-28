@@ -1,9 +1,17 @@
-<app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="filterDisplay"></app-filter>
+<app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="storeService.filterDisplay"></app-filter>
 <button (click)=toggleFilter()>Show Filter</button>
 <br/>
-<span>Total items: {{count}}, Page: {{page}}, page size: {{pageSize}}</span>
+Page size:
+<select [(ngModel)]="storeService.pageSize">
+  <option value="3">3</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="50">50</option>
+</select>
+<br/>
+<!--span>Total items: {{storeService.count}}, Page: {{storeService.page}}, page size: {{storeService.pageSize}}</span-->
 <div class="container">
-  <div class="row" *ngFor="let item of items">
+  <div class="row" *ngFor="let item of storeService.items">
     <div class="col-md-1 border">
       <a routerLink="/item/{{item.id}}">{{item.id}}</a>
     </div>
@@ -23,9 +31,9 @@
 </div>
 
 <ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="count"
+  [(page)]="storeService.page"
+  [(pageSize)]="storeService.pageSize"
+  [collectionSize]="storeService.count"
   (pageChange)="onPageChange($event)"></ngb-pagination>
 
 <br/>

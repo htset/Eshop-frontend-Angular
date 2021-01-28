@@ -11,8 +11,6 @@ export class FilterComponent implements OnInit {
 
   @Output() filterChangedEvent = new EventEmitter<Filter>();
 
-  filter: Filter = {name:"", categories: []};
-  insertedText:string = "";
   categories = [
     {name: "shoes", selected: false},
     {name: "clothes", selected: false},
@@ -22,23 +20,20 @@ export class FilterComponent implements OnInit {
   constructor(public storeService: StoreService) { }
   
   ngOnInit(): void {
-    this.filter = this.storeService.filter;
     this.categories = this.categories.map(cat => ({name: cat.name, selected: (this.storeService.filter.categories.includes(cat.name))}));
-    console.log(this.filter);
   }
 
   onKeyUp(e: Event) :void {
-    this.filter.name = this.insertedText;
+    this.storeService.filter.name = this.storeService.filter.name;
   }
 
   onChange(): void{
-    this.filter.categories = this.categories.filter(c => c.selected).map(cc => cc.name);
-    console.log(this.filter.categories);
+    this.storeService.filter.categories = this.categories.filter(c => c.selected).map(cc => cc.name);
+    console.log(this.storeService.filter.categories);
   }
 
   onFilterChanged(): void {
-    this.storeService.filter = this.filter;
-    this.filterChangedEvent.emit(this.filter);
+    this.filterChangedEvent.emit(this.storeService.filter);
   }
  
 }

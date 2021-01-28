@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Filter} from '../_models/filter';
-import { ItemPayload } from '../_models/ItemPayload';
+import { ItemPayload } from '../_models/itemPayload';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -24,8 +24,6 @@ export class ItemService {
     filter.categories.forEach(cc => categoriesString = categoriesString  + cc + "#");
     if(categoriesString.length > 0)
     categoriesString = categoriesString.substring(0, categoriesString.length -1);
-
-    console.log(categoriesString);
 
     let params = new HttpParams()
               .set("name", filter.name)

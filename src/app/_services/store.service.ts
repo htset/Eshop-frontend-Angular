@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Filter } from '../_models/filter';
 import { Item } from '../_models/item';
 
@@ -40,6 +40,30 @@ export class StoreService {
   set page(val: number) {
     this._page.next(val);
   }
+/*
+  private readonly _pageSize = new BehaviorSubject<number>(3);
+  public pageSize$ = this._pageSize.asObservable(); 
+      
+  get pageSize(): number {
+    return this._pageSize.getValue();
+  }
+
+  set pageSize(val: number) {
+    this._pageSize.next(val);
+  }
+*/
+  private _pageSize: number = 3;
+  private readonly _pageSizeSubject = new Subject<number>();
+  public pageSize$ = this._pageSizeSubject.asObservable(); 
+      
+  get pageSize(): number {
+    return this._pageSize;
+  }
+
+  set pageSize(val: number) {
+    this._pageSize = val;
+    this._pageSizeSubject.next(val);
+  }
 
   private readonly _count = new BehaviorSubject<number>(1);
   readonly count$ = this._count.asObservable(); 
@@ -52,6 +76,16 @@ export class StoreService {
     this._count.next(val);
   }
 
+  private readonly _filterDisplay = new BehaviorSubject<string>("none");
+  readonly filterDisplay$ = this._filterDisplay.asObservable(); 
+  
+  get filterDisplay(): string {
+    return this._filterDisplay.getValue();
+  }
+
+  set filterDisplay(val: string) {
+    this._filterDisplay.next(val);
+  }
   constructor() { }
 
 }
