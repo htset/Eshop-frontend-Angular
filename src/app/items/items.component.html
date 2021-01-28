@@ -32,7 +32,7 @@ Page size:
 
 <ngb-pagination
   [(page)]="storeService.page"
-  [(pageSize)]="storeService.pageSize"
+  [pageSize]="storeService.pageSize"
   [collectionSize]="storeService.count"
   (pageChange)="onPageChange($event)"></ngb-pagination>
 

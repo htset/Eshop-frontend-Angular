@@ -52,19 +52,19 @@ export class StoreService {
     this._pageSize.next(val);
   }
 */
-  private _pageSize: number = 3;
-  private readonly _pageSizeSubject = new Subject<number>();
-  public pageSize$ = this._pageSizeSubject.asObservable(); 
+  public pageSize: number = 3;
+  public readonly _pageSizeSubject = new Subject<number>();
+  public pageSizeChanges$ = this._pageSizeSubject.asObservable(); 
       
-  get pageSize(): number {
+/*  get pageSize(): number {
     return this._pageSize;
   }
-
-  set pageSize(val: number) {
+*/
+/*  set pageSize(val: number) {
     this._pageSize = val;
     this._pageSizeSubject.next(val);
   }
-
+*/
   private readonly _count = new BehaviorSubject<number>(1);
   readonly count$ = this._count.asObservable(); 
       

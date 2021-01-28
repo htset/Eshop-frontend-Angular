@@ -12,13 +12,14 @@ import { Filter } from '../_models/filter';
 export class ItemsComponent implements OnInit {
 
   constructor(private itemService: ItemService, public storeService: StoreService) { 
-    this.storeService.pageSize$
+/*    this.storeService.pageSizeChanges$
             .subscribe(newPageSize => 
               {
                 console.log('new page size:' + this.storeService.pageSize);
                 this.storeService.page = 1;
                 this.getItems();
               })
+*/              
   }
 
   getItems(): void {
