@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Item } from '../_models/item';
-import { ItemService } from '../_services/item.service';
-import { StoreService } from '@app/_services/store.service';
+import { Item } from '../../_models/item';
+import { ItemService } from '../../_services/item.service';
 
 @Component({
-  selector: 'app-item-form',
-  templateUrl: './item-form.component.html',
-  styleUrls: ['./item-form.component.css']
+  selector: 'app-admin-item-form',
+  templateUrl: './admin-item-form.component.html',
+  styleUrls: ['./admin-item-form.component.css']
 })
-export class ItemFormComponent implements OnInit {
+export class AdminItemFormComponent implements OnInit {
 
   categories: string[] = ["", "shoes", "clothes", "glasses"];
   mode:string = "new";
@@ -21,8 +20,7 @@ export class ItemFormComponent implements OnInit {
     private route: ActivatedRoute,
     private itemService: ItemService,
     private location: Location,
-    private router: Router,
-    public storeService: StoreService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,9 +29,17 @@ export class ItemFormComponent implements OnInit {
 
   get diagnostic() { return JSON.stringify(this.item); }
 
-  addToCart(): void {
-    this.storeService.cart.addItem({item: this.item, quantity: 1});
-    this.router.navigate(['/cart']);
+  onSubmit(): void {
+    if(this.mode == "existing"){
+      this.itemService.updateItem(this.item)
+        .subscribe(() => this.router.navigate(['/admin/items']));
+//        .subscribe(() => this.goBack());
+    }
+    else{
+      this.itemService.addItem(this.item)
+        .subscribe(() => this.router.navigate(['/admin/items']));
+//        .subscribe(() => this.goBack());
+    }
   }
 
   getItem(): void {
@@ -51,4 +57,5 @@ export class ItemFormComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }   
+
 }

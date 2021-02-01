@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { ITEM_PAYLOAD } from '@app/mock-items';
+import { Item } from '@app/_models/item';
+import { ItemPayload } from '@app/_models/itemPayload';
 
-const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User', token:"" }];
+const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User', token:"", role:"admin" }];
+const itemPayload:ItemPayload = ITEM_PAYLOAD;
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -23,8 +27,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return authenticate();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
+                case url.endsWith('/users') && method === 'GET':
+                    return getUsers();
+                case url.endsWith('/items') && method === 'GET':
+                    return getItems();
+                case url.endsWith('/') && method === 'GET':
+                    return getItems();
                 default:
-                    // pass through any requests not handled above
+                // pass through any requests not handled above
                     return next.handle(request);
             }    
         }
@@ -41,7 +51,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 token: 'fake-jwt-token',
-                password: ""
+                password: "",
+                role:"guest"
             }])
         }
 
@@ -50,9 +61,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok(users);
         }
 
+        function getItems() {
+            return okItems(itemPayload);
+        }
         // helper functions
 
-        function ok(body?: { id: number; username: string; password:string, firstName: string; lastName: string; token:string }[]) {
+        function okItems(body?: ItemPayload) {
+            return of(new HttpResponse({ status: 200, body }))
+        }
+
+        function ok(body?: { id: number; username: string; password:string, firstName: string; lastName: string; token:string; role:string; }[]) {
             return of(new HttpResponse({ status: 200, body }))
         }
 

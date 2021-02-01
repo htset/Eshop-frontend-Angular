@@ -3,6 +3,8 @@ import { Item } from '../_models/item';
 import { ItemService } from '../_services/item.service';
 import { StoreService } from '../_services/store.service'
 import { Filter } from '../_models/filter';
+import { AuthenticationService } from '@app/_services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-items',
@@ -11,15 +13,18 @@ import { Filter } from '../_models/filter';
 })
 export class ItemsComponent implements OnInit {
 
-  constructor(private itemService: ItemService, public storeService: StoreService) { 
-/*    this.storeService.pageSizeChanges$
+  constructor(private itemService: ItemService, 
+              public storeService: StoreService, 
+              public authenticationService: AuthenticationService,
+              public router: Router) { 
+    this.storeService.pageSizeChanges$
             .subscribe(newPageSize => 
               {
                 console.log('new page size:' + this.storeService.pageSize);
                 this.storeService.page = 1;
                 this.getItems();
               })
-*/              
+              
   }
 
   getItems(): void {
@@ -68,6 +73,15 @@ export class ItemsComponent implements OnInit {
   onPageChange(newPage: number):void {
     this.storeService.page = newPage;
     this.getItems();
+  }
+
+  onPageSizeChange():void{
+    this.storeService._pageSizeSubject.next(this.storeService.pageSize);
+  }
+
+  addToCart(item:Item): void {
+    this.storeService.cart.addItem({item: item, quantity: 1});
+    this.router.navigate(['/cart']);
   }
 
   ngOnInit(): void {

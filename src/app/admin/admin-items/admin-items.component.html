@@ -9,29 +9,35 @@ Page size:
   <option value="50">50</option>
 </select>
 <br/>
+<!--span>Total items: {{storeService.count}}, Page: {{storeService.page}}, page size: {{storeService.pageSize}}</span-->
 <div class="container">
   <div class="row" *ngFor="let item of storeService.items">
     <div class="col-md-1 border">
-      <a routerLink="/item/{{item.id}}">{{item.id}}</a>
+      <a routerLink="/admin/item/{{item.id}}">{{item.id}}</a>
     </div>
     <div class="col-md-2">
-      <a routerLink="/item/{{item.id}}">{{item.name}}</a>
+      <a routerLink="/admin/item/{{item.id}}">{{item.name}}</a>
     </div>
     <div class="col-md-1">
-      <a routerLink="/item/{{item.id}}">{{item.category}}</a>
+      <a routerLink="/admin/item/{{item.id}}">{{item.category}}</a>
     </div>
     <div class="col-md-1">
-      <a routerLink="/item/{{item.id}}">{{item.price}}</a>
+      <a routerLink="/admin/item/{{item.id}}">{{item.price}}</a>
     </div>
-    <div class="col-md-1">
-      <button (click)=addToCart(item)>Add to Cart</button>
+    <div class="col-md-1" *ngIf="authenticationService.currentUserValue.role == 'admin'">
+      <button class="btn btn-default" title="delete item" (click)="delete(item)">Delete</button>
     </div>
   </div>
 </div>
-
 
 <ngb-pagination
   [(page)]="storeService.page"
   [pageSize]="storeService.pageSize"
   [collectionSize]="storeService.count"
   (pageChange)="onPageChange($event)"></ngb-pagination>
+
+<br/>
+<a routerLink="/admin/new_item" class="btn btn-default"  
+    *ngIf="authenticationService.currentUserValue.role == 'admin'">Add new Item
+</a>
+

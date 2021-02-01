@@ -1,0 +1,66 @@
+aa: {{diagnostic}}
+<div class="container">
+    <div>
+      <h1>Item: {{item.name}}</h1>
+      <form (ngSubmit)="onSubmit()" #itemForm="ngForm">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id"
+                   readonly
+                   [(ngModel)]="item.id" name="id"
+                   #id="ngModel">
+            <div [hidden]="id.valid || id.pristine"
+                 class="alert alert-danger">
+              Item ID is required
+            </div>
+          </div>
+  
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name"
+                 required
+                 [(ngModel)]="item.name" name="name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+               class="alert alert-danger">
+            Name is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+            <label for="price">price</label>
+            <input type="text" class="form-control" id="price"
+                   required
+                   [(ngModel)]="item.price" name="price"
+                   #price="ngModel">
+            <div [hidden]="price.valid || price.pristine"
+                 class="alert alert-danger">
+              Price is required
+            </div>
+          </div>
+
+          <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description"
+                 [(ngModel)]="item.description" name="description">
+        </div>
+  
+        <div class="form-group">
+          <label for="category">item category</label>
+          <select class="form-control" id="category"
+                  required
+                  [(ngModel)]="item.category" name="category"
+                  #category="ngModel">
+            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          </select>
+          <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
+            Category is required
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">Save</button>
+        <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+      </form>
+    </div>
+  
+  </div>

@@ -1,0 +1,20 @@
+<p>Cart Info</p>
+<div class="container">
+    <div class="row" *ngFor="let item of storeService.cart.cartItems">
+      <div class="col-md-2">
+        <a routerLink="/item/{{item.item.id}}">{{item.item.name}}</a>
+      </div>
+      <div class="col-md-1">
+        <a routerLink="/item/{{item.item.id}}">{{item.item.price}}</a>
+      </div>
+      <div class="col-md-1">
+        <input type="number" [(ngModel)]="item.quantity"/>
+      </div>
+      <div class="col-md-1">
+        <button (click)="removeFromCart(item)">Remove</button>
+      </div>
+    </div>
+</div>
+Total: {{storeService.cart.getTotalValue()}}
+<a routerLink="">Back to items..</a><br/>
+<a routerLink="/checkout">Checkout..</a>
