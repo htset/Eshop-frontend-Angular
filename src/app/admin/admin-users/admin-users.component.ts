@@ -17,10 +17,16 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
       this.loading = true;
-      this.userService.getAll().pipe(first()).subscribe(users => {
+//      this.userService.getAll().pipe(first()).subscribe(
+        this.userService.getAll().subscribe(
+        ((users:User[]) => {
           this.loading = false;
           this.users = users;
-      });
+        }),
+        ((err:any) => { 
+          let a = err;
+          console.log(err);
+        }));
   }
 
 }
