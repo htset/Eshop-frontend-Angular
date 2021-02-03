@@ -21,17 +21,21 @@ import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { fakeBackendProvider } from './_helpers/fake-backend';
 import { CartComponent } from './cart/cart.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
-//    DashboardComponent,
     ItemFormComponent,
-//    UserDetailComponent,
     LoginComponent,
-CartComponent
+    CartComponent,
+    ProfileComponent,
+    RegistrationComponent,
+    ItemDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +51,8 @@ CartComponent
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-//    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     //fakeBackendProvider

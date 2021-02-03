@@ -77,14 +77,14 @@ export class StoreService {
     this._count.next(val);
   }
 
-  private readonly _filterDisplay = new BehaviorSubject<string>("none");
+  private readonly _filterDisplay = new BehaviorSubject<boolean>(false);
   readonly filterDisplay$ = this._filterDisplay.asObservable(); 
   
-  get filterDisplay(): string {
+  get filterDisplay(): boolean {
     return this._filterDisplay.getValue();
   }
 
-  set filterDisplay(val: string) {
+  set filterDisplay(val: boolean) {
     this._filterDisplay.next(val);
   }
 

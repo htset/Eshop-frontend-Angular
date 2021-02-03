@@ -27,6 +27,10 @@ export class Cart {
         }
     }
 
+    emptyCart(){
+        this.cartItems = [];
+    }
+
     getTotalValue():number {
         //let total: number = 0;
         let sum = this.cartItems.reduce(

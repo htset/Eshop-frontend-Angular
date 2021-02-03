@@ -1,5 +1,22 @@
-<app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="storeService.filterDisplay"></app-filter>
-<button (click)=toggleFilter()>Show Filter</button>
+<!--app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="storeService.filterDisplay"></app-filter>
+
+<button (click)="toggleFilter()">Filters</button-->
+  <button (click)="openFilter()">Filters</button>
+<!--ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-filter (filterChangedEvent)="FilterChanged($event)"></app-filter>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template-->
+
 <br/>
 Page size:
 <select [(ngModel)]="storeService.pageSize" (change)="onPageSizeChange()">
@@ -9,26 +26,17 @@ Page size:
   <option value="50">50</option>
 </select>
 <br/>
-<div class="container">
-  <div class="row" *ngFor="let item of storeService.items">
-    <div class="col-md-1 border">
-      <a routerLink="/item/{{item.id}}">{{item.id}}</a>
-    </div>
-    <div class="col-md-2">
-      <a routerLink="/item/{{item.id}}">{{item.name}}</a>
-    </div>
-    <div class="col-md-1">
-      <a routerLink="/item/{{item.id}}">{{item.category}}</a>
-    </div>
-    <div class="col-md-1">
-      <a routerLink="/item/{{item.id}}">{{item.price}}</a>
-    </div>
-    <div class="col-md-1">
-      <button (click)=addToCart(item)>Add to Cart</button>
+<div class="row">
+  <div *ngFor="let item of storeService.items;">
+    <div class="card">
+      <a routerLink="/item/{{item.id}}"><img src="https://localhost:44326/MyImages/{{item.id}}.png" width="70px"/></a>
+      <div class="card-body">
+        <h5 class="card-title"><a routerLink="/item/{{item.id}}">{{item.name}}</a></h5>
+        <p class="card-subtitle mb-2 text-muted">{{item.price}}</p>
+      </div>
     </div>
   </div>
 </div>
-
 
 <ngb-pagination
   [(page)]="storeService.page"

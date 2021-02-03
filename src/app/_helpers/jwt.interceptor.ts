@@ -26,15 +26,15 @@ export class JwtInterceptor implements HttpInterceptor {
         }
 
 //        return next.handle(request);
-    return next.handle(request).pipe( tap(() => {},
-      (err: any) => {
-      if (err instanceof HttpErrorResponse) {
-        if (err.status !== 401) {
-         return;
+        return next.handle(request).pipe( tap(() => {},
+        (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+            if (err.status !== 401) {
+            return;
+            }
+            this.router.navigate(['login']);
         }
-        this.router.navigate(['login']);
-      }
-    }));
+        }));
 
     }
 }

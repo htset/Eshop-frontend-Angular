@@ -5,6 +5,8 @@ import { StoreService } from '../_services/store.service'
 import { Filter } from '../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FilterComponent } from '@app/filter/filter.component';
 
 @Component({
   selector: 'app-items',
@@ -13,17 +15,26 @@ import { Router } from '@angular/router';
 })
 export class ItemsComponent implements OnInit {
 
+  closeResult = '';
+
   constructor(private itemService: ItemService, 
               public storeService: StoreService, 
               public authenticationService: AuthenticationService,
-              public router: Router) { 
-    this.storeService.pageSizeChanges$
+              public router: Router,
+              private modalService: NgbModal) { 
+        this.storeService.pageSizeChanges$
             .subscribe(newPageSize => 
               {
                 console.log('new page size:' + this.storeService.pageSize);
                 this.storeService.page = 1;
                 this.getItems();
-              })
+              });
+              
+        this.storeService.filter$
+            .subscribe(newFilter => {
+              this.storeService.page = 1;
+              this.getItems();          
+            });
               
   }
 
@@ -56,11 +67,13 @@ export class ItemsComponent implements OnInit {
                                 });
   }
 
+
   toggleFilter(): void{
-    if(this.storeService.filterDisplay == "block")
-      this.storeService.filterDisplay = "none";
-    else
-      this.storeService.filterDisplay = "block"; 
+    this.storeService.filterDisplay = ! this.storeService.filterDisplay;
+  }
+
+  openFilter(){
+    this.modalService.open(FilterComponent);
   }
 
   FilterChanged(filter: Filter): void {

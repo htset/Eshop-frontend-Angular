@@ -1,8 +1,36 @@
-<div class="container">
-    <input type="text" #searchBox [(ngModel)]="storeService.filter.name" (keyup)="onKeyUp($event)" />
-    <ul>
-        <li *ngFor="let cat of categories">{{cat.name}}: <input type="checkbox" [(ngModel)]="cat.selected" (change)="onChange()"/></li>
-    </ul>
-    <br/>
-    <button (click)="onFilterChanged()">Update Filter</button>
-</div>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <input type="text" #searchBox [(ngModel)]="tempFilter.name" />
+        <ul>
+            <li *ngFor="let cat of categories">{{cat.name}}: <input type="checkbox" [(ngModel)]="cat.selected" (change)="onChange()"/></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="onFilterChanged()">Update Filter</button>
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+
+<!----
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Filter</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <input type="text" #searchBox [(ngModel)]="storeService.filter.name" (keyup)="onKeyUp($event)" />
+        <ul>
+            <li *ngFor="let cat of categories">{{cat.name}}: <input type="checkbox" [(ngModel)]="cat.selected" (change)="onChange()"/></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="onFilterChanged()">Update Filter</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template-->

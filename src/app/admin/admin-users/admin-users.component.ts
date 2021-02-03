@@ -16,17 +16,17 @@ export class AdminUsersComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-      this.loading = true;
-//      this.userService.getAll().pipe(first()).subscribe(
-        this.userService.getAll().subscribe(
-        ((users:User[]) => {
-          this.loading = false;
-          this.users = users;
-        }),
-        ((err:any) => { 
-          let a = err;
-          console.log(err);
-        }));
+    this.loading = true;
+//  this.userService.getAll().pipe(first()).subscribe(
+    this.userService.getAll().subscribe(
+    ((users:User[]) => {
+      this.loading = false;
+      this.users = users;
+    }),
+    ((err:any) => { 
+      let a = err;
+      console.log(err);
+    }));
   }
 
 }

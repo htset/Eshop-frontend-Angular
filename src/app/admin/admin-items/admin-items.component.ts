@@ -4,6 +4,7 @@ import { ItemService } from '../../_services/item.service';
 import { StoreService } from '../../_services/store.service'
 import { Filter } from '../../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin-items',
@@ -12,9 +13,12 @@ import { AuthenticationService } from '@app/_services/authentication.service';
 })
 export class AdminItemsComponent implements OnInit {
 
+  closeResult = '';
+
   constructor(private itemService: ItemService, 
     public storeService: StoreService, 
-    public authenticationService: AuthenticationService) { 
+    public authenticationService: AuthenticationService,
+    private modalService: NgbModal) { 
     this.storeService.pageSizeChanges$
       .subscribe(newPageSize => 
         {
@@ -54,22 +58,19 @@ export class AdminItemsComponent implements OnInit {
   }
 
   toggleFilter(): void{
-  if(this.storeService.filterDisplay == "block")
-  this.storeService.filterDisplay = "none";
-  else
-  this.storeService.filterDisplay = "block"; 
+    this.storeService.filterDisplay = ! this.storeService.filterDisplay;
   }
 
   FilterChanged(filter: Filter): void {
-  this.storeService.page = 1;
-  this.storeService.filter = filter;
-  console.log(filter);
-  this.getItems();    
+    this.storeService.page = 1;
+    this.storeService.filter = filter;
+    console.log(filter);
+    this.getItems();    
   }
 
   onPageChange(newPage: number):void {
-  this.storeService.page = newPage;
-  this.getItems();
+    this.storeService.page = newPage;
+    this.getItems();
   }
 
   onPageSizeChange():void{

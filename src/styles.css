@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+/*
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+*/
 
 body {
     padding: 20px;
@@ -8,8 +10,9 @@ body {
 .row > div {
     margin-top:5px;
     padding: 10px;
-    outline: 2px solid #ccc;
-    outline-offset: -5px;
-    -moz-outline-radius: 10px;
-    -webkit-outline-radius: 10px;
  }
+
+ input[type=number]{
+    width: 40px;
+}  
+

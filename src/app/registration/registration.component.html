@@ -1,0 +1,41 @@
+<h2>Registration</h2>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <label for="username">User Name:
+            <input type="text" formControlName="username"
+             [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.username.errors }"/>
+        </label>    
+        {{registrationForm.controls.username.errors?.required}}
+        <div *ngIf="submitted && registrationForm.controls.username.errors">
+            <div *ngIf="registrationForm.controls.username.errors?.required">Username is required</div>
+            <div *ngIf="registrationForm.controls.username.errors?.minlength">Username must be at least 4 characters</div>  
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="password">Password:
+            <input type="password" formControlName="password"/>
+        </label>    
+        <div *ngIf="submitted && registrationForm.controls.password.errors">
+            <div *ngIf="registrationForm.controls.password.errors?.required">Password is required</div> 
+        </div> 
+    </div>
+    <div class="form-row">
+        <label for="confirmPassword">Confirm password:
+            <input type="password" formControlName="confirmPassword"/>
+        </label>  
+        <div *ngIf="submitted && (registrationForm.controls.confirmPassword.errors || registrationForm?.errors?.passwordsMustMatch)">
+            <div *ngIf="registrationForm.controls.confirmPassword.errors?.required">Confirm Password is required</div>
+            <div *ngIf="registrationForm?.errors?.passwordsMustMatch">Passwords must match</div>
+        </div>  
+    </div>
+    <div class="form-row">
+        <label for="email">Email:
+            <input type="text" formControlName="email"/>
+        </label>
+        <div *ngIf="submitted && registrationForm.controls.email.errors">
+            <div *ngIf="registrationForm.controls.email.errors?.required">Email is required</div>  
+            <div *ngIf="registrationForm.controls.email.errors?.email">Email must be a valid email address</div>
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
