@@ -19,15 +19,17 @@ export class UserService {
     }
 
     addUser(user:User){
-        return this.http.post<User>(`${environment.apiUrl}/users`, user, this.httpOptions).pipe(
-            catchError(this.handleError<User>('addUser'))
-          );
+        return this.http.post<User>(`${environment.apiUrl}/users`, user, this.httpOptions);
+        //.pipe(
+        //    catchError(this.handleError<User>('addUser'))
+        //  );
     }
-    
+/*    
     handleError<T>(operation = 'operation', result?: T) {
         return (error: any) : Observable<T> => {
             console.error(error);
             return of(result as T);
         }
-    }      
+    }
+*/          
 }

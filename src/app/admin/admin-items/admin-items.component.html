@@ -1,5 +1,4 @@
-<app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="storeService.filterDisplay"></app-filter>
-<button (click)=toggleFilter()>Show Filter</button>
+<button (click)="openFilter()">Filters</button>
 <br/>
 Page size:
 <select [(ngModel)]="storeService.pageSize" (change)="onPageSizeChange()">
@@ -12,7 +11,7 @@ Page size:
 <!--span>Total items: {{storeService.count}}, Page: {{storeService.page}}, page size: {{storeService.pageSize}}</span-->
 <div class="container">
   <div class="row" *ngFor="let item of storeService.items">
-    <div class="col-md-1 border">
+    <div class="col-md-1">
       <a routerLink="/admin/item/{{item.id}}">{{item.id}}</a>
     </div>
     <div class="col-md-2">

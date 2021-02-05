@@ -5,7 +5,7 @@ import { StoreService } from '../_services/store.service'
 import { Filter } from '../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterComponent } from '@app/filter/filter.component';
 
 @Component({
@@ -48,6 +48,7 @@ export class ItemsComponent implements OnInit {
                                   } );
   }
 
+ /* 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
@@ -67,7 +68,7 @@ export class ItemsComponent implements OnInit {
                                 });
   }
 
-
+*/
   toggleFilter(): void{
     this.storeService.filterDisplay = ! this.storeService.filterDisplay;
   }

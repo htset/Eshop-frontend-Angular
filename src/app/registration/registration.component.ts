@@ -22,11 +22,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private userService:UserService,
               public authenticationService: AuthenticationService) { }
 
-
-  PasswordsMustMatch(){
-
-  }
-
   ngOnInit(): void {
   }
 
@@ -41,8 +36,10 @@ export class RegistrationComponent implements OnInit {
           username: this.registrationForm.controls.username.value,
           password: this.registrationForm.controls.password.value,
           email: this.registrationForm.controls.email.value
-        }).subscribe(item => {
-          console.log("ok");
+        }).subscribe({
+          next: x => console.log('Observer got a next value: ' + x),
+          error: err => console.error('Observer got an error: ' + err),
+          complete: () => console.log('Observer got a complete notification'),         
         });
   }
 }

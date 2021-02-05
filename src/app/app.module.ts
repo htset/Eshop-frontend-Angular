@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
@@ -24,6 +24,10 @@ import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
+import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { CommonModule } from '@angular/common';
+import { GlobalErrorHandler } from './_helpers/global-error-handler';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -35,10 +39,13 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
     CartComponent,
     ProfileComponent,
     RegistrationComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    LoadingDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
 //    HttpClientInMemoryWebApiModule.forRoot(
@@ -51,6 +58,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
     AppRoutingModule
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

@@ -5,6 +5,7 @@ import { StoreService } from '../../_services/store.service'
 import { Filter } from '../../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FilterComponent } from '@app/filter/filter.component';
 
 @Component({
   selector: 'app-admin-items',
@@ -19,14 +20,20 @@ export class AdminItemsComponent implements OnInit {
     public storeService: StoreService, 
     public authenticationService: AuthenticationService,
     private modalService: NgbModal) { 
-    this.storeService.pageSizeChanges$
+      this.storeService.pageSizeChanges$
       .subscribe(newPageSize => 
         {
           console.log('new page size:' + this.storeService.pageSize);
           this.storeService.page = 1;
           this.getItems();
-        })              
-  }
+        });
+        
+      this.storeService.filter$
+        .subscribe(newFilter => {
+          this.storeService.page = 1;
+          this.getItems();          
+        });
+}
 
   getItems(): void {
   console.log('GetItems() --> page size: ' + this.storeService.pageSize);
@@ -61,6 +68,10 @@ export class AdminItemsComponent implements OnInit {
     this.storeService.filterDisplay = ! this.storeService.filterDisplay;
   }
 
+  openFilter(){
+    this.modalService.open(FilterComponent);
+  }
+  
   FilterChanged(filter: Filter): void {
     this.storeService.page = 1;
     this.storeService.filter = filter;
