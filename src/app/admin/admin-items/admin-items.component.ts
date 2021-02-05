@@ -5,7 +5,7 @@ import { StoreService } from '../../_services/store.service'
 import { Filter } from '../../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FilterComponent } from '@app/filter/filter.component';
+import { FilterComponent } from '@app/shared/filter/filter.component';
 
 @Component({
   selector: 'app-admin-items',

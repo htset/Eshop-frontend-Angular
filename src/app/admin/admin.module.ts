@@ -12,7 +12,7 @@ import { JwtInterceptor } from '@app/_helpers/jwt.interceptor';
 import { ErrorInterceptor } from '@app/_helpers/error.interceptor';
 import { AdminItemsComponent } from './admin-items/admin-items.component';
 import { AdminItemFormComponent } from './admin-item-form/admin-item-form.component';
-import { FilterComponent } from '@app/filter/filter.component';
+import { FilterComponent } from '@app/shared/filter/filter.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminUsersComponent } from './admin-users/admin-users.component';

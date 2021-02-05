@@ -1,7 +1,7 @@
 import { Component, OnInit,  Output, EventEmitter, ViewChild, ElementRef  } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Filter } from '../_models/filter';
-import { StoreService } from '../_services/store.service';
+import { Filter } from '../../_models/filter';
+import { StoreService } from '../../_services/store.service';
 
 @Component({
   selector: 'app-filter',

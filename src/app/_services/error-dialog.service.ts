@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { ErrorDialogComponent } from '@app/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '@app/shared/error-dialog/error-dialog.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
