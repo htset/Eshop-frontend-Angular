@@ -12,14 +12,18 @@ import { passwordsMustMatchValidator } from '@app/_validators/passwordsMustMatch
 })
 export class RegistrationComponent implements OnInit {
   submitted = false;
-  registrationForm = new FormGroup({
+  success:boolean = false;
+  failure:boolean = false;
+  errorMessage?: string;
+
+registrationForm = new FormGroup({
       username: new FormControl('test1', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('test1', Validators.required),
       confirmPassword: new FormControl('test1', Validators.required),
       email: new FormControl('t@t.gr', [Validators.required, Validators.email]),
     }, { validators: [passwordsMustMatchValidator] });
 
-  constructor(private userService:UserService,
+    constructor(private userService:UserService,
               public authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -37,8 +41,17 @@ export class RegistrationComponent implements OnInit {
           password: this.registrationForm.controls.password.value,
           email: this.registrationForm.controls.email.value
         }).subscribe({
-          next: x => console.log('Observer got a next value: ' + x),
-          error: err => console.error('Observer got an error: ' + err),
+          next: x => {
+            console.log('Observer got a next value: ' + x);
+            this.success = true;
+            this.failure = false;
+          },
+          error: err => {
+            console.error('Observer got an error: ' + err);
+            this.success = false;
+            this.failure = true;
+            this.errorMessage = err;
+          },
           complete: () => console.log('Observer got a complete notification'),         
         });
   }

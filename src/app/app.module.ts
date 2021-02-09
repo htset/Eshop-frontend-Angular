@@ -28,6 +28,8 @@ import { LoadingDialogComponent } from './shared/loading-dialog/loading-dialog.c
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { CommonModule } from '@angular/common';
 import { GlobalErrorHandler } from './_helpers/global-error-handler';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -41,7 +43,9 @@ import { GlobalErrorHandler } from './_helpers/global-error-handler';
     RegistrationComponent,
     ItemDetailsComponent,
     LoadingDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    CheckoutComponent,
+    DeliveryAddressComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { User } from '@app/_models/user';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { Address } from '@app/_models/address';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -31,5 +32,17 @@ export class UserService {
             return of(result as T);
         }
     }
-*/          
+*/   
+    getAddressByUserId(userId: number) {
+        return this.http.get<Address[]>(`${environment.apiUrl}/address`);
+    }       
+
+    saveAddress(address: Address) {
+        return this.http.post<Address>(`${environment.apiUrl}/address`, address);
+    }       
+
+    deleteAddress(addressId?: number) {
+        return this.http.delete<number>(`${environment.apiUrl}/address/${addressId}`);
+    }       
+
 }
