@@ -1,0 +1,28 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <label for="cardnumber">Credit card no.:
+            <input type="text" formControlName="cardnumber"/>
+        </label>    
+    </div>
+    <div class="form-row">
+        <label for="holdername">Holder's Name:
+            <input type="text" formControlName="holdername"/>
+        </label>
+    </div>
+    <div class="form-row">
+        <label for="code">Code:
+            <input type="text" formControlName="code"/>
+        </label>
+    </div>
+    <div class="form-row">
+        <label for="expirydate">Expiry date:
+            <select formControlName="expirymonth">
+                <option *ngFor="let item of numSequence(12); let i = index;" [value]="i+1">{{i+1}}</option>
+            </select>
+            <select formControlName="expiryyear">
+                <option *ngFor="let i of numSequenceStart(5, 2021);" [value]="i">{{i}}</option>
+            </select>
+        </label>
+    </div>
+    <button type="submit" [disabled]="!paymentForm.valid">Finalize Order</button>
+</form>

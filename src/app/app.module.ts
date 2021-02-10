@@ -30,6 +30,8 @@ import { CommonModule } from '@angular/common';
 import { GlobalErrorHandler } from './_helpers/global-error-handler';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
+import { PaymentComponent } from './payment/payment.component';
+import { SummaryComponent } from './summary/summary.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -45,7 +47,9 @@ import { DeliveryAddressComponent } from './delivery-address/delivery-address.co
     LoadingDialogComponent,
     ErrorDialogComponent,
     CheckoutComponent,
-    DeliveryAddressComponent
+    DeliveryAddressComponent,
+    PaymentComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

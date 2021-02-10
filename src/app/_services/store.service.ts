@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Address } from '@app/_models/address';
 import { Cart } from '@app/_models/cart';
+import { Order } from '@app/_models/order';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Filter } from '../_models/filter';
 import { Item } from '../_models/item';
@@ -98,6 +100,28 @@ export class StoreService {
   set cart(val: Cart) {
     this._cart.next(val);
   }
+
+  private readonly _deliveryAddress = new BehaviorSubject<number>(-1);
+  readonly deliveryAddress$ = this._deliveryAddress.asObservable(); 
+  
+  get deliveryAddress(): number {
+    return this._deliveryAddress.getValue();
+  }
+
+  set deliveryAddress(val: number) {
+    this._deliveryAddress.next(val);
+  }  
+
+  private readonly _order = new BehaviorSubject<Order>(new Order());
+  readonly order$ = this._order.asObservable(); 
+  
+  get order(): Order {
+    return this._order.getValue();
+  }
+
+  set order(val: Order) {
+    this._order.next(val);
+  }  
 
   constructor() { }
 

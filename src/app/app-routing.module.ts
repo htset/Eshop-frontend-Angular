@@ -7,6 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentComponent } from './payment/payment.component';
+import { SummaryComponent } from './summary/summary.component';
 
 const routes: Routes = [
   {path: '', component: ItemsComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent}, 
   {path: 'registration', component: RegistrationComponent},  
   {path: 'checkout', component: CheckoutComponent},  
+  {path: 'payment', component: PaymentComponent},  
+  {path: 'summary', component: SummaryComponent},  
   {path: '**', redirectTo: ''}
 ];
 

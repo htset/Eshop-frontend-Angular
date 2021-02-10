@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Address } from '@app/_models/address';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { StoreService } from '@app/_services/store.service';
@@ -17,7 +18,8 @@ export class CheckoutComponent implements OnInit {
   vv:string = "";
   constructor(public storeService: StoreService,
                   public authenticationService: AuthenticationService,
-                  public userService: UserService ) { }
+                  public userService: UserService,
+                  public router: Router ) { }
 
   ngOnInit(): void {
     console.info(this.authenticationService.currentUserValue);
@@ -25,6 +27,7 @@ export class CheckoutComponent implements OnInit {
       this.userService.getAddressByUserId(this?.authenticationService?.currentUserValue?.id || 0)
           .subscribe(addresses => {
             this.addressList = addresses;
+            this.addressId = this.storeService.deliveryAddress;
           })
     }
   }
@@ -58,5 +61,10 @@ export class CheckoutComponent implements OnInit {
             this.addressList = this.addressList?.filter(addr => addr.id != addressId);
           })
     }
-  }  
+  } 
+  
+  onSubmit():void{
+    this.storeService.deliveryAddress = this.addressId;
+    this.router.navigate(['/payment']);
+  }
 }
