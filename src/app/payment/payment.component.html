@@ -1,28 +1,35 @@
 <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-        <label for="cardnumber">Credit card no.:
-            <input type="text" formControlName="cardnumber"/>
-        </label>    
+    <div class="form-row">    
+        <div class="form-group col-md-2">
+            <label for="cardnumber">Credit card no.:</label>
+                <input type="text" class="form-control form-control-sm" formControlName="cardnumber"/>
+        </div>
     </div>
-    <div class="form-row">
-        <label for="holdername">Holder's Name:
-            <input type="text" formControlName="holdername"/>
-        </label>
+    <div class="form-row">    
+        <div class="form-group col-md-2">
+            <label for="holdername">Holder's Name:</label>
+                <input type="text" class="form-control form-control-sm" formControlName="holdername"/>
+        </div>
     </div>
-    <div class="form-row">
-        <label for="code">Code:
-            <input type="text" formControlName="code"/>
-        </label>
+    <div class="form-row">    
+            <div class="form-group col-md-2">
+                <label for="code">Code:</label>
+                <input type="text" class="form-control form-control-sm" formControlName="code"/>
+        </div>
     </div>
-    <div class="form-row">
-        <label for="expirydate">Expiry date:
-            <select formControlName="expirymonth">
+    <div class="form-row">    
+        <div class="form-group col-sm-1">
+            <label for="expirydate">Expiry date:</label>
+            <select formControlName="expirymonth" class="form-control form-control-sm">
                 <option *ngFor="let item of numSequence(12); let i = index;" [value]="i+1">{{i+1}}</option>
             </select>
-            <select formControlName="expiryyear">
+        </div>
+        <div class="form-group col-sm-1">
+            <label for="expirydate">&nbsp;</label>
+            <select formControlName="expiryyear" class="form-control form-control-sm">
                 <option *ngFor="let i of numSequenceStart(5, 2021);" [value]="i">{{i}}</option>
             </select>
-        </label>
+        </div>
     </div>
     <button type="submit" [disabled]="!paymentForm.valid">Finalize Order</button>
 </form>

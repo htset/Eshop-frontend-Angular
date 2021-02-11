@@ -1,33 +1,27 @@
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-        <label for="firstname">First Name:
-            <input type="text" formControlName="firstname"/>
-        </label>    
+    <div class="form-group">
+        <label for="firstname">First Name:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="firstname"/>           
     </div>
-    <div class="form-row">
-        <label for="lastname">Last Name:
-            <input type="text" formControlName="lastname"/>
-        </label>
+    <div class="form-group">
+        <label for="lastname">Last Name:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="lastname"/>
     </div>
-    <div class="form-row">
-        <label for="street">Street:
-            <input type="text" formControlName="street"/>
-        </label>
+    <div class="form-group">
+        <label for="street">Street:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="street"/>
     </div>
-    <div class="form-row">
-        <label for="zip">ZIP code:
-            <input type="text" formControlName="zip"/>
-        </label>
+    <div class="form-group">
+        <label for="zip">ZIP code:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="zip"/>
     </div>
-    <div class="form-row">
-        <label for="city">City:
-            <input type="text" formControlName="city"/>
-        </label>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="city"/>
     </div>
-    <div class="form-row">
-        <label for="country">Country:
-            <input type="text" formControlName="country"/>
-        </label>
+    <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="country"/>
     </div>
-    <button type="submit" [disabled]="!addressForm.valid">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!addressForm.valid">Save</button>
 </form>

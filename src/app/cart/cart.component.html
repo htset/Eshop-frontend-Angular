@@ -1,24 +1,27 @@
 <h3>Cart Details</h3>
-<div class="container">
-    <div class="row" *ngFor="let item of storeService.cart.cartItems">
-      <div class="col-md-1">
-        <a routerLink="/item/{{item.item.id}}"><img src="https://localhost:44326/MyImages/{{item.item.id}}.png" width="70px"/></a>
-      </div>
-        <div class="col-md-2">
-        <a routerLink="/item/{{item.item.id}}">{{item.item.name}}</a>
-      </div>
-      <div class="col-md-1">
-        <a routerLink="/item/{{item.item.id}}">{{item.item.price}}</a>
-      </div>
-      <div class="col-md-1">
-        <input type="number" [(ngModel)]="item.quantity" size="2"/>
-      </div>
-      <div class="col-md-1">
-        <button (click)="removeFromCart(item)">Remove</button>
-      </div>
-    </div>
-</div>
-<button (click)="emptyCart()">Empty Cart</button>
-Total: {{storeService.cart.getTotalValue()}}
-<a routerLink="">Back to items..</a><br/>
-<a routerLink="/checkout">Checkout..</a>
+<table class="table table-striped">
+  <tr>
+    <th>&nbsp;</th>
+    <th>Name</th>
+    <th>Unit Price</th>
+    <th>Quantity</th>
+    <th>Total Price</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr *ngFor="let item of storeService.cart.cartItems">
+    <td><a routerLink="/item/{{item.item.id}}"><img src="https://localhost:44326/MyImages/{{item.item.id}}.png" width="70px"/></a></td>
+    <td><a routerLink="/item/{{item.item.id}}">{{item.item.name}}</a></td>
+    <td><a routerLink="/item/{{item.item.id}}">{{item.item.price}}</a></td>
+    <td><input type="number" [(ngModel)]="item.quantity" size="2"/></td>
+    <td><a routerLink="/item/{{item.item.id}}">{{item.item.price * item.quantity}}</a></td>
+    <td><button (click)="removeFromCart(item)">Remove</button></td>
+  </tr>
+  <tr>
+    <td colspan="4">&nbsp;</td>
+    <td>{{storeService.cart.getTotalValue()}}</td>
+    <td>&nbsp;</td>
+  </tr>  
+</table>
+<button (click)="emptyCart()">Empty Cart</button><br/>
+<button routerLink="/checkout">Go to Checkout..</button><br/>
+<button routerLink="">Back to items..</button><br/>

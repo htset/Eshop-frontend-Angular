@@ -59,6 +59,9 @@ export class CheckoutComponent implements OnInit {
       this.userService.deleteAddress(addr.id)
           .subscribe(addressId => {
             this.addressList = this.addressList?.filter(addr => addr.id != addressId);
+
+            if(this.addressId == addressId)
+              this.addressId = -1;
           })
     }
   } 
