@@ -7,6 +7,7 @@
 </div> 
 <div *ngIf="user?.id" align="right">
     User: {{user?.username}} | 
+    <a *ngIf="user.role == 'admin'" routerLink='/admin'>Admin | </a> 
     <a href="#" (click)="logout($event)">Logout</a> 
 </div>
 
