@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppComponent } from './app.component';
-import { ItemsComponent } from './items/items.component';
+import { ItemsComponent } from './workflow/items/items.component';
 //import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './_services/in-memory-data.service';
-import { ItemFormComponent } from './item-form/item-form.component';
+//import { ItemFormComponent } from './item-form/item-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 //import { UserDetailComponent } from './user-detail/user-detail.component';
 import { FilterComponent } from './shared/filter/filter.component';
@@ -20,25 +20,25 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { fakeBackendProvider } from './_helpers/fake-backend';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './workflow/cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
+import { ItemDetailsComponent } from './workflow/item-details/item-details.component';
 import { LoadingDialogComponent } from './shared/loading-dialog/loading-dialog.component';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { CommonModule } from '@angular/common';
 import { GlobalErrorHandler } from './_helpers/global-error-handler';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
-import { PaymentComponent } from './payment/payment.component';
-import { SummaryComponent } from './summary/summary.component';
+import { CheckoutComponent } from './workflow/checkout/checkout.component';
+import { DeliveryAddressComponent } from './shared/delivery-address/delivery-address.component';
+import { PaymentComponent } from './workflow/payment/payment.component';
+import { SummaryComponent } from './workflow/summary/summary.component';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
-    ItemFormComponent,
+//    ItemFormComponent,
     LoginComponent,
     CartComponent,
     ProfileComponent,

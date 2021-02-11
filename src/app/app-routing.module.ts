@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ItemsComponent } from './items/items.component';
+import { ItemsComponent } from './workflow/items/items.component';
 import { LoginComponent } from './login/login.component';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './workflow/cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { PaymentComponent } from './payment/payment.component';
-import { SummaryComponent } from './summary/summary.component';
+import { ItemDetailsComponent } from './workflow/item-details/item-details.component';
+import { CheckoutComponent } from './workflow/checkout/checkout.component';
+import { PaymentComponent } from './workflow/payment/payment.component';
+import { SummaryComponent } from './workflow/summary/summary.component';
 
 const routes: Routes = [
   {path: '', component: ItemsComponent },
