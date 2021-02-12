@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 private errorDialogService: ErrorDialogService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.loadingDialogService.openDialog();
+//        this.loadingDialogService.openDialog();
         return next.handle(request).pipe(
             catchError(error => {
                 console.error("Error from error interceptor", error);
@@ -32,7 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 return throwError(error1);
             }),
             finalize(() => {
-                this.loadingDialogService.hideDialog();
+//                this.loadingDialogService.hideDialog();
             })
         ) as Observable<HttpEvent<any>>;
     }

@@ -14,3 +14,4 @@ import { FormsModule } from '@angular/forms';
   exports: [ FilterComponent]
 })
 export class SharedModule { }
+

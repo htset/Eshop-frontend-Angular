@@ -32,6 +32,7 @@ import { CheckoutComponent } from './workflow/checkout/checkout.component';
 import { DeliveryAddressComponent } from './shared/delivery-address/delivery-address.component';
 import { PaymentComponent } from './workflow/payment/payment.component';
 import { SummaryComponent } from './workflow/summary/summary.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
@@ -63,7 +64,8 @@ import { SummaryComponent } from './workflow/summary/summary.component';
     NgbModule,
     AdminModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

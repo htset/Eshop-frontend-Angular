@@ -7,6 +7,7 @@ import { AuthenticationService } from '@app/_services/authentication.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterComponent } from '@app/shared/filter/filter.component';
+import { LoadingDialogService } from '@app/_services/loading-dialog.service';
 
 @Component({
   selector: 'app-items',
@@ -16,12 +17,14 @@ import { FilterComponent } from '@app/shared/filter/filter.component';
 export class ItemsComponent implements OnInit {
 
   closeResult = '';
+  loading=false;
 
   constructor(private itemService: ItemService, 
               public storeService: StoreService, 
               public authenticationService: AuthenticationService,
               public router: Router,
-              private modalService: NgbModal) { 
+              private modalService: NgbModal,
+              private loadingDialogService: LoadingDialogService) { 
         this.storeService.pageSizeChanges$
             .subscribe(newPageSize => 
               {
@@ -40,11 +43,15 @@ export class ItemsComponent implements OnInit {
 
   getItems(): void {
     console.log('GetItems() --> page size: ' + this.storeService.pageSize);
+    //this.loadingDialogService.openDialog();
+    this.storeService.loading=true;
     this.itemService.getItems(this.storeService.filter, this.storeService.page, this.storeService.pageSize)
                       .subscribe(itemPayload => 
                                   {
                                     this.storeService.items = itemPayload.items;
                                     this.storeService.count = itemPayload.count; 
+                                   // this.loadingDialogService.hideDialog();
+                                   this.storeService.loading=false;
                                   } );
   }
 
@@ -99,7 +106,7 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getItems();
+  //  this.getItems();
   }
 
 }

@@ -43,3 +43,9 @@ Page size:
   [pageSize]="storeService.pageSize"
   [collectionSize]="storeService.count"
   (pageChange)="onPageChange($event)"></ngb-pagination>
+
+  <div class="d-flex justify-content-center" *ngIf="storeService.loading">
+    <div class="spinner-border" role="status" >
+      <span class="sr-only" id="loading"></span>
+    </div>
+  </div>
