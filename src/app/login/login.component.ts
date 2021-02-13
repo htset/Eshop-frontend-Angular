@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService
     ) { 
         // redirect to home if already logged in
-//        if (this.authenticationService.currentUserValue.id) { 
-//            this.router.navigate(['/admin']);
-//        }
+/*        if (this.authenticationService.currentUserValue.id) { 
+            this.router.navigate(['/admin']);
+        }
+*/
+        if(this.route.snapshot.queryParams['role'] == "customer")
+            this.error = "Access to page is restricted. You should login with admin credentials";
     }
 
     ngOnInit() {
@@ -52,7 +55,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([returnUrl]);
                 },
                 error: error => {
-                    this.error = error;
+                    //this.error = error;
                     this.loading = false;
                 }
             });

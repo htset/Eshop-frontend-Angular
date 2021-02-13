@@ -1,23 +1,5 @@
-<!--app-filter (filterChangedEvent)="FilterChanged($event)" [style.display]="storeService.filterDisplay"></app-filter>
+<button (click)="openFilter()">Filters</button>
 
-<button (click)="toggleFilter()">Filters</button-->
-  <button (click)="openFilter()">Filters</button>
-<!--ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Filter</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <app-filter (filterChangedEvent)="FilterChanged($event)"></app-filter>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template-->
-
-<br/>
 Page size:
 <select [(ngModel)]="storeService.pageSize" (change)="onPageSizeChange()">
   <option value="3">3</option>
@@ -26,6 +8,7 @@ Page size:
   <option value="50">50</option>
 </select>
 <br/>
+
 <div class="row">
   <div *ngFor="let item of storeService.items;">
     <div class="card">
@@ -44,8 +27,3 @@ Page size:
   [collectionSize]="storeService.count"
   (pageChange)="onPageChange($event)"></ngb-pagination>
 
-  <div class="d-flex justify-content-center" *ngIf="storeService.loading">
-    <div class="spinner-border" role="status" >
-      <span class="sr-only" id="loading"></span>
-    </div>
-  </div>
