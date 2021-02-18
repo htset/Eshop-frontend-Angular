@@ -2,6 +2,7 @@
 /*
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 */
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 body {
     padding: 20px;
@@ -19,3 +20,13 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.example-overlay {
+    width: 1000px;
+    height: 1000px;
+    opacity: 0.3;
+    background: lightgrey;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+  }

@@ -1,19 +1,32 @@
-<h1><a href="/">{{title}}</a></h1>
-<div *ngIf="!user?.id" align="right">
-    <a routerLink='login'>Log in</a>
-</div>
-<div *ngIf="storeService.cart.cartItems.length > 0" align="right">
-    <a routerLink='cart'>Cart</a>
-</div> 
-<div *ngIf="user?.id" align="right">
-    User: {{user?.username}} | 
-    <a *ngIf="user.role == 'admin'" routerLink='/admin'>Admin | </a> 
-    <a href="#" (click)="logout($event)">Logout</a> 
-</div>
-<div class="d-flex justify-content-center" *ngIf="storeService.loading">
-    <div class="spinner-border" role="status" >
-      <span class="sr-only" id="loading"></span>
-    </div>
+<div cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  <ng-template cdkConnectedOverlay 
+      [cdkConnectedOverlayOrigin]="trigger" 
+      [cdkConnectedOverlayOpen]="isOpen">
+      <div class="d-flex justify-content-center example-overlay" >
+        <div class="spinner-border" role="status" >
+          <span class="sr-only" id="loading"></span>
+        </div>
+      </div>
+    </ng-template>
+  
+  <h1 ><a href="/">{{title}}</a></h1>
+  <div *ngIf="!user?.id" align="right">
+      <a routerLink='login'>Log in</a>
   </div>
+  <div *ngIf="storeService.cart.cartItems.length > 0" align="right">
+      <a routerLink='cart'>Cart</a>
+  </div> 
+  <div *ngIf="user?.id" align="right">
+      User: {{user?.username}} | 
+      <a *ngIf="user.role == 'admin'" routerLink='/admin'>Admin | </a> 
+      <a href="#" (click)="logout($event)">Logout</a> 
+  </div>
+  <!--div class="d-flex justify-content-center" *ngIf="storeService.loading">
+      <div class="spinner-border" role="status" >
+        <span class="sr-only" id="loading"></span>
+      </div>
+    </div-->
 
-<router-outlet></router-outlet>
+
+  <router-outlet></router-outlet>
+</div>

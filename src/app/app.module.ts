@@ -34,6 +34,7 @@ import { PaymentComponent } from './workflow/payment/payment.component';
 import { SummaryComponent } from './workflow/summary/summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
+import { OverlayModule } from "@angular/cdk/overlay";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminModule,
     SharedModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    OverlayModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
