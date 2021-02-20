@@ -1,7 +1,7 @@
 <button (click)="openFilter()">Filters</button>
 
 Page size:
-<select [(ngModel)]="storeService.pageSize" (change)="onPageSizeChange()">
+<select [(ngModel)]="storeService.pageSize" (change)="onPageSizeChange()" id="pageSize">
   <option value="3">3</option>
   <option value="5">5</option>
   <option value="10">10</option>
@@ -9,7 +9,7 @@ Page size:
 </select>
 <br/>
 
-<div class="row">
+<div class="row" id="envelope">
   <div *ngFor="let item of storeService.items;">
     <div class="card">
       <a routerLink="/item/{{item.id}}"><img src="https://localhost:44326/MyImages/{{item.id}}.png" width="70px"/></a>

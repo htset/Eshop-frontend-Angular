@@ -2,7 +2,6 @@ import { Component,OnInit } from '@angular/core';
 import { Item } from '../../_models/item';
 import { ItemService } from '../../_services/item.service';
 import { StoreService } from '../../_services/store.service'
-import { Filter } from '../../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,97 +15,66 @@ import { LoadingDialogService } from '@app/_services/loading-dialog.service';
 })
 export class ItemsComponent implements OnInit {
 
-  closeResult = '';
   loading=false;
 
-  constructor(private itemService: ItemService, 
-              public storeService: StoreService, 
-              public authenticationService: AuthenticationService,
-              public router: Router,
-              private modalService: NgbModal,
-              private loadingDialogService: LoadingDialogService) { 
-        this.storeService.pageSizeChanges$
-            .subscribe(newPageSize => 
-              {
-                console.log('new page size:' + this.storeService.pageSize);
-                this.storeService.page = 1;
-                this.getItems();
-              });
-              
-        this.storeService.filter$
-            .subscribe(newFilter => {
-              this.storeService.page = 1;
-              this.getItems();          
-            });
-              
+  constructor(
+    private itemService: ItemService, 
+    public storeService: StoreService, 
+    public authenticationService: AuthenticationService,
+    public router: Router,
+    private modalService: NgbModal,
+    private loadingDialogService: LoadingDialogService) { 
+
+
   }
 
   getItems(): void {
     console.log('GetItems() --> page size: ' + this.storeService.pageSize);
     //this.loadingDialogService.openDialog();
-    this.storeService.loading=true;
+    this.storeService.loading = true;
     this.itemService.getItems(this.storeService.filter, this.storeService.page, this.storeService.pageSize)
-                      .subscribe(itemPayload => 
-                                  {
-                                    this.storeService.items = itemPayload.items;
-                                    this.storeService.count = itemPayload.count; 
-                                   // this.loadingDialogService.hideDialog();
-                                   this.storeService.loading=false;
-                                  } );
+      .subscribe(itemPayload => {
+        this.storeService.items = itemPayload.items;
+        this.storeService.count = itemPayload.count; 
+        console.log(itemPayload.items.length);
+        // this.loadingDialogService.hideDialog();
+        this.storeService.loading=false;
+      });
   }
 
- /* 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.itemService.addItem({ name } as Item)
-                    .subscribe(item => {
-                      this.storeService.items.push(item);
-                    });
-  }
-
-  delete(item: Item): void {
-    this.storeService.items = this.storeService.items.filter(h => h !== item);
-    this.itemService.deleteItem(item)
-                    .subscribe(item => 
-                                {
-                                  this.storeService.page = 1;
-                                  this.getItems();
-                                });
-  }
-
-*/
-  toggleFilter(): void{
-    this.storeService.filterDisplay = ! this.storeService.filterDisplay;
-  }
-
-  openFilter(){
+  openFilter(): void{
     this.modalService.open(FilterComponent);
   }
 
-  FilterChanged(filter: Filter): void {
-    this.storeService.page = 1;
-    this.storeService.filter = filter;
-    console.log(filter);
-    this.getItems();    
-  }
-
-  onPageChange(newPage: number):void {
+  onPageChange(newPage: number): void {
     this.storeService.page = newPage;
     this.getItems();
   }
 
-  onPageSizeChange():void{
+  onPageSizeChange(): void{
     this.storeService._pageSizeSubject.next(this.storeService.pageSize);
   }
 
   addToCart(item:Item): void {
+    //default quantity = 1
     this.storeService.cart.addItem({item: item, quantity: 1});
     this.router.navigate(['/cart']);
   }
 
   ngOnInit(): void {
   //  this.getItems();
+  this.storeService.pageSizeChanges$
+  .subscribe(newPageSize => {
+    console.log('new page size:' + this.storeService.pageSize);
+    this.storeService.page = 1;
+    this.getItems();
+  });
+      
+this.storeService.filter$
+  .subscribe(newFilter => {
+    this.storeService.page = 1;
+    this.getItems();          
+  });  
   }
 
 }

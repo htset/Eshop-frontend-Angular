@@ -12,7 +12,7 @@ import { StoreService } from './_services/store.service';
 export class AppComponent {
   title = 'My new e-shop!';
   user!: User;
-  isOpen:boolean = true;
+  isOpen:boolean = false;
 
   constructor(
       private router: Router,
