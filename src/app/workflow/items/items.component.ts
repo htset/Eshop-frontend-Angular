@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterComponent } from '@app/shared/filter/filter.component';
 import { LoadingDialogService } from '@app/_services/loading-dialog.service';
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-items',
@@ -23,10 +24,7 @@ export class ItemsComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public router: Router,
     private modalService: NgbModal,
-    private loadingDialogService: LoadingDialogService) { 
-
-
-  }
+    private loadingDialogService: LoadingDialogService) {  }
 
   getItems(): void {
     console.log('GetItems() --> page size: ' + this.storeService.pageSize);
@@ -62,19 +60,23 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  //  this.getItems();
-  this.storeService.pageSizeChanges$
-  .subscribe(newPageSize => {
-    console.log('new page size:' + this.storeService.pageSize);
-    this.storeService.page = 1;
-    this.getItems();
-  });
+    console.log("ngOnInit");
+
+    this.storeService.pageSizeChanges$
+      .subscribe(newPageSize => {
+        console.log('new page size:' + this.storeService.pageSize);
+        this.storeService.page = 1;
+        this.getItems();
+      });
       
-this.storeService.filter$
-  .subscribe(newFilter => {
-    this.storeService.page = 1;
-    this.getItems();          
-  });  
+    this.storeService.filter$
+      .pipe(skip(1))    //skip getting filter at component creation
+      .subscribe(newFilter => {
+        this.storeService.page = 1;
+        this.getItems();          
+      });  
+
+    this.getItems();
   }
 
 }

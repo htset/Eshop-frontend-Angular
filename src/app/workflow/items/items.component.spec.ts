@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 
 import { ItemsComponent } from './items.component';
 
-fdescribe('ItemsComponent', () => {
+describe('ItemsComponent', () => {
   let component: ItemsComponent;
   let fixture: ComponentFixture<ItemsComponent>;
 
@@ -62,13 +62,84 @@ fdescribe('ItemsComponent', () => {
   });
 
   it('should show 5 items after page size change', () => {  
+    let el = fixture.nativeElement.querySelectorAll('.card');
+    expect(el.length).toEqual(3, 'starting with 3 items');
+
     const select: HTMLSelectElement = fixture.debugElement.query(By.css('#pageSize')).nativeElement;
     select.value = select.options[1].value;  // <-- select a new value
     select.dispatchEvent(new Event('change'));
-    fixture.detectChanges();  
-    let el = fixture.nativeElement.querySelectorAll('.card');
+    fixture.detectChanges();
+    el = fixture.nativeElement.querySelectorAll('.card');  
     console.log(el);
-    expect(el.length).toEqual(5);
+    expect(el.length).toEqual(5, 'finishing with 5 items');
+
+    expect(component.storeService.page).toEqual(1);
+  });
+
+});
+
+fdescribe('ItemsComponent pagination', () => {
+  let component: ItemsComponent;
+  let fixture: ComponentFixture<ItemsComponent>;
+
+  beforeEach(() => {
+
+    let testItems1: ItemPayload = {
+      count: 14,
+      items: [
+        {id:1, name:"a", price:1, category:"", description:""},
+        {id:2, name:"a", price:1, category:"", description:""},
+        {id:3, name:"a", price:1, category:"", description:""}
+      ]
+    };
+    let testItems2: ItemPayload = {
+      count: 14,
+      items: [
+        {id:11, name:"b", price:1, category:"", description:""},
+        {id:12, name:"b", price:1, category:"", description:""},
+        {id:13, name:"b", price:1, category:"", description:""}
+      ]
+    };    
+    let testItems3: ItemPayload = {
+      count: 14,
+      items: [
+        {id:21, name:"c", price:1, category:"", description:""},
+        {id:22, name:"c", price:1, category:"", description:""},
+        {id:23, name:"c", price:1, category:"", description:""}
+      ]
+    };    
+    const itemService = jasmine.createSpyObj('ItemService', ['getItems']);
+    let getItemsSpy = itemService.getItems.and.returnValues(of(testItems1), of(testItems2), of(testItems3));
+
+    TestBed.configureTestingModule({
+      declarations: [ ItemsComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule, NgbModule, FormsModule ],
+      providers: [{provide: ItemService, useValue: itemService}]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(ItemsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    component.onPageChange(3); 
+    fixture.detectChanges();
+    expect(component.storeService.page).toEqual(3);
+
+    //go to item details
+    fixture.destroy();
+    //return to items component - recreate component
+    fixture.detectChanges();
+    fixture = TestBed.createComponent(ItemsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+  });
+
+  it('should return to the same page after viewing item', () => { 
+
+    expect(component.storeService.page).toEqual(3, "returning page");
+
   });
 
 });
