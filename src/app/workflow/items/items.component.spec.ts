@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -78,7 +78,7 @@ describe('ItemsComponent', () => {
 
 });
 
-fdescribe('ItemsComponent pagination', () => {
+describe('ItemsComponent pagination', () => {
   let component: ItemsComponent;
   let fixture: ComponentFixture<ItemsComponent>;
 
@@ -140,6 +140,68 @@ fdescribe('ItemsComponent pagination', () => {
 
     expect(component.storeService.page).toEqual(3, "returning page");
 
+  });
+
+});
+
+
+describe('ItemsComponent pagination 2', () => {
+  let component: ItemsComponent;
+  let fixture: ComponentFixture<ItemsComponent>;
+
+  beforeEach(async () => {
+
+    let testItems1: ItemPayload = {
+      count: 14,
+      items: [
+        {id:1, name:"a", price:1, category:"", description:""},
+        {id:2, name:"a", price:1, category:"", description:""},
+        {id:3, name:"a", price:1, category:"", description:""}
+      ]
+    };
+    let testItems2: ItemPayload = {
+      count: 14,
+      items: [
+        {id:1, name:"a", price:1, category:"", description:""},
+        {id:2, name:"a", price:1, category:"", description:""},
+        {id:3, name:"a", price:1, category:"", description:""},
+      ]
+    };    
+    const itemService = jasmine.createSpyObj('ItemService', ['getItems']);
+    let getItemsSpy = itemService.getItems.and.returnValues(of(testItems1), of(testItems2));
+
+    await TestBed.configureTestingModule({
+      declarations: [ ItemsComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule, NgbModule, FormsModule ],
+      providers: [{provide: ItemService, useValue: itemService}]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ItemsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('pagination element should change after page size select change ', () => { 
+    let compiled: HTMLElement = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('ngb-pagination')).not.toBeNull();
+    
+    let el:HTMLElement = <HTMLElement>compiled.querySelector('ngb-pagination');
+    let pageNumbers = el.querySelectorAll('li');
+    //let pageNumbers = compiled.querySelectorAll('ngb-pagination > li');
+
+    expect(pageNumbers.length).toEqual(7);
+    fixture.detectChanges();
+
+    const select: HTMLSelectElement = fixture.debugElement.query(By.css('#pageSize')).nativeElement;
+    select.value = select.options[2].value;  // <-- select a new value
+    console.log("size:" + select.value);
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    pageNumbers = el.querySelectorAll('li');
+    expect(pageNumbers.length).toEqual(4);
   });
 
 });

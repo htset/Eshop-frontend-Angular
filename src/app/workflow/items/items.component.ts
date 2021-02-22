@@ -34,7 +34,7 @@ export class ItemsComponent implements OnInit {
       .subscribe(itemPayload => {
         this.storeService.items = itemPayload.items;
         this.storeService.count = itemPayload.count; 
-        console.log(itemPayload.items.length);
+        console.log("Items length: " + itemPayload.items.length);
         // this.loadingDialogService.hideDialog();
         this.storeService.loading=false;
       });
@@ -52,13 +52,13 @@ export class ItemsComponent implements OnInit {
   onPageSizeChange(): void{
     this.storeService._pageSizeSubject.next(this.storeService.pageSize);
   }
-
+/*
   addToCart(item:Item): void {
     //default quantity = 1
     this.storeService.cart.addItem({item: item, quantity: 1});
     this.router.navigate(['/cart']);
   }
-
+*/
   ngOnInit(): void {
     console.log("ngOnInit");
 
