@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 
 import { ItemDetailsComponent } from './item-details.component';
 
-fdescribe('ItemDetailsComponent', () => {
+describe('ItemDetailsComponent', () => {
   let component: ItemDetailsComponent;
   let fixture: ComponentFixture<ItemDetailsComponent>;
   let router: Router;

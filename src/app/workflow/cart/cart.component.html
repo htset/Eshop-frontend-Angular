@@ -12,9 +12,9 @@
     <td><a routerLink="/item/{{item.item.id}}"><img src="https://localhost:44326/MyImages/{{item.item.id}}.png" width="70px"/></a></td>
     <td><a routerLink="/item/{{item.item.id}}">{{item.item.name}}</a></td>
     <td><a routerLink="/item/{{item.item.id}}">{{item.item.price}}</a></td>
-    <td><input type="number" [(ngModel)]="item.quantity" size="2"/></td>
+    <td><input type="number" [(ngModel)]="item.quantity" size="2" id="quantity"/></td>
     <td><a routerLink="/item/{{item.item.id}}">{{item.item.price * item.quantity}}</a></td>
-    <td><button (click)="removeFromCart(item)">Remove</button></td>
+    <td><input type="button" (click)="removeFromCart(item)" id="remove" value="Remove"/></td>
   </tr>
   <tr>
     <td colspan="4">&nbsp;</td>
