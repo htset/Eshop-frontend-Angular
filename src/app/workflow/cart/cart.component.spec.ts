@@ -8,7 +8,7 @@ import { Item } from '@app/_models/item';
 
 import { CartComponent } from './cart.component';
 
-fdescribe('CartComponent', () => {
+describe('CartComponent', () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
 

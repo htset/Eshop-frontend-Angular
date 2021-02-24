@@ -19,11 +19,11 @@ export class PaymentComponent implements OnInit {
   @Input('creditcard') card?:CreditCard;
 
   paymentForm = new FormGroup({
-    cardnumber: new FormControl('', Validators.required),
+    cardnumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{16}$/)]),
     holdername: new FormControl('', Validators.required),
-    code: new FormControl('', Validators.required),
-    expirymonth: new FormControl(''),
-    expiryyear: new FormControl('')
+    code: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{3}$/)]),
+    expirymonth: new FormControl('', Validators.required),
+    expiryyear: new FormControl('', Validators.required)
   });  
   constructor(private authenticationService: AuthenticationService,
               private storeService: StoreService,
