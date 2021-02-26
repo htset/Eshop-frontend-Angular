@@ -60,6 +60,7 @@ export class FilterComponent implements OnInit {
   }
 */
   onChange(): void{
+    console.log("on change");
     this.tempFilter.categories = this.categories.filter(c => c.selected).map(cc => cc.name);
     console.log(this.tempFilter.categories);
   }

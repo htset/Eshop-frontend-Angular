@@ -5,13 +5,13 @@
   </button>
 </div>
 <div class="modal-body">
-    <input type="text" #searchBox [(ngModel)]="tempFilter.name" />
+    <input type="text" #searchBox id="searchbox" [(ngModel)]="tempFilter.name" />
     <ul>
-        <li *ngFor="let cat of categories">{{cat.name}}: <input type="checkbox" [(ngModel)]="cat.selected" (change)="onChange()"/></li>
+        <li *ngFor="let cat of categories">{{cat.name}}: <input type="checkbox" [(ngModel)]="cat.selected" id={{cat.name}} (change)="onChange()"/></li>
     </ul>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="onFilterChanged()">Update Filter</button>
+  <button type="button" id="update" class="btn btn-outline-dark" (click)="onFilterChanged()">Update Filter</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>
 
