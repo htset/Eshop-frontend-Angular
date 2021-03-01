@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { FilterComponent } from './filter.component';
 
-fdescribe('FilterComponent', () => {
+describe('FilterComponent', () => {
   let component: FilterComponent;
   let fixture: ComponentFixture<FilterComponent>;
 

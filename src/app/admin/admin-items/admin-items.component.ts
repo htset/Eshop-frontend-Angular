@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../../_models/item';
 import { ItemService } from '../../_services/item.service';
 import { StoreService } from '../../_services/store.service'
-import { Filter } from '../../_models/filter';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterComponent } from '@app/shared/filter/filter.component';
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-items',
@@ -14,69 +14,32 @@ import { FilterComponent } from '@app/shared/filter/filter.component';
 })
 export class AdminItemsComponent implements OnInit {
 
-  closeResult = '';
-
   constructor(private itemService: ItemService, 
     public storeService: StoreService, 
     public authenticationService: AuthenticationService,
-    private modalService: NgbModal) { 
-      this.storeService.pageSizeChanges$
-      .subscribe(newPageSize => 
-        {
-          console.log('new page size:' + this.storeService.pageSize);
-          this.storeService.page = 1;
-          this.getItems();
-        });
-        
-      this.storeService.filter$
-        .subscribe(newFilter => {
-          this.storeService.page = 1;
-          this.getItems();          
-        });
-}
+    private modalService: NgbModal) { }
 
   getItems(): void {
-  console.log('GetItems() --> page size: ' + this.storeService.pageSize);
-  this.itemService.getItems(this.storeService.filter, this.storeService.page, this.storeService.pageSize)
-              .subscribe(itemPayload => 
-                          {
-                            this.storeService.items = itemPayload.items;
-                            this.storeService.count = itemPayload.count; 
-                          } );
-  }
-
-  add(name: string): void {
-  name = name.trim();
-  if (!name) { return; }
-  this.itemService.addItem({ name } as Item)
-            .subscribe(item => {
-              this.storeService.items.push(item);
-            });
+    console.log('GetItems() --> page size: ' + this.storeService.pageSize);
+    this.storeService.loading = true;
+    this.itemService.getItems(this.storeService.filter, this.storeService.page, this.storeService.pageSize)
+      .subscribe(itemPayload => {
+        this.storeService.items = itemPayload.items;
+        this.storeService.count = itemPayload.count; 
+        this.storeService.loading = false;
+      });
   }
 
   delete(item: Item): void {
-  this.storeService.items = this.storeService.items.filter(h => h !== item);
-  this.itemService.deleteItem(item)
-            .subscribe(item => 
-                        {
-                          this.storeService.page = 1;
-                          this.getItems();
-                        });
-  }
-
-  toggleFilter(): void{
-    this.storeService.filterDisplay = ! this.storeService.filterDisplay;
+    this.itemService.deleteItem(item)
+      .subscribe(item => {
+        this.storeService.page = 1;
+        this.getItems();
+      });
   }
 
   openFilter(){
     this.modalService.open(FilterComponent);
-  }
-  
-  FilterChanged(filter: Filter): void {
-    this.storeService.page = 1;
-    this.storeService.filter = filter;
-    console.log(filter);
-    this.getItems();    
   }
 
   onPageChange(newPage: number):void {
@@ -89,7 +52,22 @@ export class AdminItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.getItems();
+    this.storeService.pageSizeChanges$
+      .subscribe(newPageSize => 
+        {
+          console.log('new page size:' + this.storeService.pageSize);
+          this.storeService.page = 1;
+          this.getItems();
+        });
+      
+    this.storeService.filter$
+      .pipe(skip(1))    //skip getting filter at component creation
+      .subscribe(newFilter => {
+          this.storeService.page = 1;
+          this.getItems();          
+        });  
+        
+    this.getItems();
   }
 
 }

@@ -34,20 +34,18 @@ export class AdminItemFormComponent implements OnInit {
     private location: Location,
     private router: Router,
     private uploadService: UploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getItem();
   }
 
-//  get diagnostic() { return JSON.stringify(this.item); }
-
   onSubmit(): void {
     if(this.item.id > 0){
       this.itemService.updateItem(this.item)
-      .subscribe(() => {
-        this.itemForm?.form.markAsPristine(); //disable Save button again
-      });
+        .subscribe(() => {
+          this.itemForm?.form.markAsPristine(); //disable Save button again
+        });
     }
     else{
       this.itemService.addItem(this.item)
@@ -59,13 +57,31 @@ export class AdminItemFormComponent implements OnInit {
   }
 
   getItem(): void {
-    console.log("ID:" + this.route.snapshot.paramMap.get('id'));
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id);
-    if(id != 0)
-    {
-      this.itemService.getItem(id)
-      .subscribe(item => this.item = item);   
+    console.log(Number(this.route.snapshot.paramMap.get('id')));
+    if(this.route.snapshot.paramMap.get('id') === 'undefined'
+        || this.route.snapshot.paramMap.get('id') === null
+        || Number(this.route.snapshot.paramMap.get('id')) === 0){
+      
+      this.item = new Item(0, "", 0, "", "");
+    }
+    else{
+      const id = Number(this.route.snapshot.paramMap.get('id')?.trim());
+      console.log("ID:" + id);
+      if(id > 0){
+        this.itemService.getItem(id)
+        .subscribe({
+          next: (item) => {
+            this.item = item;          
+          },
+          error: error => {
+            console.error(error);
+            this.router.navigate(['/404']);
+          }
+        });   
+      }
+      else{
+        this.router.navigate(['/404']);
+      }
     }
   }
 
@@ -98,7 +114,8 @@ export class AdminItemFormComponent implements OnInit {
        return linkPicture + '?' + this.timeStamp;
     }
     return linkPicture;
-}
+  }
+
   public updateLinkPicture() {
     this.timeStamp = (new Date()).getTime();
   }

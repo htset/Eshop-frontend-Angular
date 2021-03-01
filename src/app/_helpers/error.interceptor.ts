@@ -20,12 +20,19 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError(error => {
                 console.error("Error from error interceptor", error);
-                this.errorDialogService.openDialog(error.message ?? JSON.stringify(error), error.status);
+
+                if (error.status !== 404){
+                    this.errorDialogService.openDialog(error.message ?? JSON.stringify(error), error.status);
+                }
+
                 if (error.status === 401) {
                     // auto logout if 401 response returned from api
                     this.authenticationService.logout();
                     this.router.navigate(['login']);
                 // location.reload(true);
+                }
+                else if (error.status === 404) {
+                    this.router.navigate(['404']);
                 }
 
                 const error1 = error.message || error.statusText;

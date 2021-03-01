@@ -35,6 +35,7 @@ import { SummaryComponent } from './workflow/summary/summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { fakeBackendProvider } from './_helpers/fake-backend';
 import { OverlayModule } from "@angular/cdk/overlay";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { OverlayModule } from "@angular/cdk/overlay";
     CheckoutComponent,
     DeliveryAddressComponent,
     PaymentComponent,
-    SummaryComponent
+    SummaryComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

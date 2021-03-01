@@ -8,7 +8,7 @@
                   readonly
                   [(ngModel)]="item.id" name="id"
                   #id="ngModel">
-          <div [hidden]="id.valid || id.pristine"
+          <div *ngIf="id.invalid && (id.dirty || id.touched)"
                 class="alert alert-danger">
             Item ID is required
           </div>
@@ -20,7 +20,7 @@
                 required
                 [(ngModel)]="item.name" name="name"
                 #name="ngModel">
-        <div [hidden]="name.valid || name.pristine"
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
               class="alert alert-danger">
           Name is required
         </div>
@@ -30,11 +30,16 @@
           <label for="price">price</label>
           <input type="text" class="form-control form-control-sm" id="price"
                   required
+                  [ngClass]="{ 'is-invalid':  item.price <= 0 }" 
                   [(ngModel)]="item.price" name="price"
                   #price="ngModel">
-          <div [hidden]="price.valid || price.pristine"
+          <div *ngIf="price.invalid && (price.dirty || price.touched)"
                 class="alert alert-danger">
             Price is required
+          </div>
+          <div *ngIf="price.value <= 0 && (price.dirty || price.touched)"
+                class="alert alert-danger">
+            Price must be greater than zero
           </div>
         </div>
 
@@ -53,7 +58,8 @@
                 #category="ngModel">
           <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
         </select>
-        <div [hidden]="category.valid || category.pristine" class="alert alert-danger">
+        <div *ngIf="category.invalid && (category.dirty || category.touched)" 
+            class="alert alert-danger">
           Category is required
         </div>
       </div>
