@@ -65,8 +65,8 @@
       </div>
 
       <div class="form-group col-md-8">
-        <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid || itemForm.form.pristine">Save</button>
-        <button type="button" class="btn btn-danger" (click)="goBack()">Back</button>
+        <button type="submit" class="btn btn-success" id="submit" [disabled]="!itemForm.form.valid || itemForm.form.pristine">Save</button>
+        <button type="button" class="btn btn-danger" id="back" (click)="goBack()">Back</button>
       </div>
     </form>
   </div>

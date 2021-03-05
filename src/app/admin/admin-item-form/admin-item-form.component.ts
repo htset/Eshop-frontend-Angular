@@ -30,7 +30,7 @@ export class AdminItemFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private itemService: ItemService,
+    public itemService: ItemService,
     private location: Location,
     private router: Router,
     private uploadService: UploadService
@@ -57,7 +57,7 @@ export class AdminItemFormComponent implements OnInit {
   }
 
   getItem(): void {
-    console.log(Number(this.route.snapshot.paramMap.get('id')));
+    console.log('id: ' + Number(this.route.snapshot.paramMap.get('id')));
     if(this.route.snapshot.paramMap.get('id') === 'undefined'
         || this.route.snapshot.paramMap.get('id') === null
         || Number(this.route.snapshot.paramMap.get('id')) === 0){
@@ -65,7 +65,7 @@ export class AdminItemFormComponent implements OnInit {
       this.item = new Item(0, "", 0, "", "");
     }
     else{
-      const id = Number(this.route.snapshot.paramMap.get('id')?.trim());
+      const id = Number(this.route.snapshot.paramMap.get('id'));
       console.log("ID:" + id);
       if(id > 0){
         this.itemService.getItem(id)
