@@ -10,43 +10,52 @@ export const ITEM_PAYLOAD: ItemPayload =
             id: 1,    
             name: "aaaa",
             price: 12.75,
-            category: "clothes"
+            category: "shoes",
+            description: "eee"
         },
         {
             id: 2,    
             name: "bbbb",
             price: 11.15,
-            category: "clothes"
+            category: "clothes",
+            description: "eee"
         },   
         {
             id: 3,    
             name: "cccc",
             price: 7.55,
-            category: "clothes"
-        },   
+            category: "glasses",
+            description: "eee"
+        }
+        /*   
         {
             id: 4,    
             name: "dddd",
             price: 1.05,
-            category: "clothes"
+            category: "clothes",
+            description: "eee"
         }, 
         {
             id: 5,    
             name: "eeee",
             price: 21.05,
-            category: "clothes"
+            category: "clothes",
+            description: "eee"
         } ,   
         {
             id: 6,    
             name: "ffff",
             price: 11,
-            category: "clothes"
+            category: "clothes",
+            description: "eee"
         },    
         {
             id: 7,    
             name: "gggg",
             price: 6.23,
-            category: "clothes"
-        }    
+            category: "shoes",
+            description: "eee"
+        } 
+        */   
     ] 
 };

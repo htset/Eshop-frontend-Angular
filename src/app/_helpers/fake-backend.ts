@@ -31,6 +31,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getUsers();
                 case url.endsWith('/items') && method === 'GET':
                     return getItems();
+                case url.endsWith('/items/1') && method === 'GET':
+                    return getItem();
                 case url.endsWith('/') && method === 'GET':
                     return getItems();
                 default:
@@ -64,9 +66,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getItems() {
             return okItems(itemPayload);
         }
+
+        function getItem() {
+            return okItem(        {
+                id: 1,    
+                name: "aaaa",
+                price: 12.75,
+                category: "shoes",
+                description: "eee"
+            },);
+        }        
         // helper functions
 
         function okItems(body?: ItemPayload) {
+            return of(new HttpResponse({ status: 200, body }))
+        }
+
+        function okItem(body?: Item) {
             return of(new HttpResponse({ status: 200, body }))
         }
 
