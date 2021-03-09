@@ -28,15 +28,18 @@ export class CheckoutComponent implements OnInit {
           .subscribe(addresses => {
             this.addressList = addresses;
             this.addressId = this.storeService.deliveryAddress;
+            console.log(this.addressList);
           })
     }
   }
 
   addressChanged(addr:Address):void{
+    console.log('address changed');
     //update address list
     if(this?.authenticationService?.currentUserValue?.id || 0 > 0){
       this.userService.getAddressByUserId(this?.authenticationService?.currentUserValue?.id || 0)
           .subscribe(addresses => {
+            console.log('address changed subscribe');
             this.addressList = addresses;
             //change selected checkbox
             this.addressId = addr.id || 0;
@@ -67,6 +70,7 @@ export class CheckoutComponent implements OnInit {
   } 
   
   onSubmit():void{
+    console.log('on submit');
     this.storeService.deliveryAddress = this.addressId;
     this.router.navigate(['/payment']);
   }

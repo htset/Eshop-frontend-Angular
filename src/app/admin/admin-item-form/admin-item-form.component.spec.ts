@@ -551,7 +551,7 @@ describe('AdminItemFormComponent', () => {
 
 });
 
-fdescribe('AdminItemFormComponent', () => {
+describe('AdminItemFormComponent', () => {
   let component: AdminItemFormComponent;
   let fixture: ComponentFixture<AdminItemFormComponent>;
   let router: Router;
