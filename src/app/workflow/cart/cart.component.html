@@ -22,6 +22,6 @@
     <td>&nbsp;</td>
   </tr>  
 </table>
-<button (click)="emptyCart()">Empty Cart</button><br/>
-<button routerLink="/checkout">Go to Checkout..</button><br/>
-<button routerLink="">Back to items..</button><br/>
+<button (click)="emptyCart()" id="empty" [disabled]="storeService.cart.cartItems.length == 0">Empty Cart</button><br/>
+<button routerLink="/checkout" id="checkout" [disabled]="storeService.cart.cartItems.length == 0 || !storeService.cart.isCartValid()">Go to Checkout..</button><br/>
+<button routerLink="">Back to items</button><br/>

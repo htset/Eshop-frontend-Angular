@@ -37,4 +37,11 @@ export class Cart {
             (a, b) => {a = a + b.item.price * b.quantity; return a;}, 0);
         return sum;
     }
+
+    isCartValid(): boolean{
+        if(this.cartItems.find(cartitem => (cartitem.quantity == null || cartitem.quantity <= 0)) === undefined)
+            return true;
+        
+        return false;
+    }
 }
