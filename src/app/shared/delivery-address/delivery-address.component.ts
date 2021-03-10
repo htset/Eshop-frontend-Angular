@@ -26,8 +26,8 @@ export class DeliveryAddressComponent implements OnInit {
     userId: new FormControl('')
   });
   
-  constructor(private authenticationService: AuthenticationService,
-              private userService: UserService) { }
+  constructor(public authenticationService: AuthenticationService,
+              public userService: UserService) { }
 
   ngOnInit(): void {
     this.addressForm.controls.firstname.setValue(this?.address?.firstName);
@@ -38,6 +38,7 @@ export class DeliveryAddressComponent implements OnInit {
     this.addressForm.controls.country.setValue(this?.address?.country);
     this.addressForm.controls.id.setValue(this?.address?.id);
     this.addressForm.controls.userId.setValue(this?.address?.userId);
+
   }
 
   onSubmit(){

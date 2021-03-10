@@ -63,7 +63,9 @@
                     </td>
                     <td>
                         <strong>New address:</strong><br/>
-                        <app-delivery-address *ngIf="addressId==0" (addressChangedEvent)="addressChanged($event)"></app-delivery-address>                    
+                        <app-delivery-address 
+                            *ngIf="addressId==0" (addressChangedEvent)="addressChanged($event)">
+                        </app-delivery-address>                    
                     </td>
                 </tr>
             </table>
